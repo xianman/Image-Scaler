@@ -35,6 +35,13 @@ enum OutputFormat: String, CaseIterable, Identifiable {
     }
 }
 
+enum OutputDestination: String, CaseIterable, Identifiable {
+    case subfolder = "Subfolder"
+    case inPlace = "In Place"
+    case chooseFolder = "Choose Folder…"
+    var id: String { rawValue }
+}
+
 struct Preset: Identifiable, Hashable {
     let id = UUID()
     let title: String
@@ -66,7 +73,10 @@ struct ContentView: View {
     @AppStorage("outputFormat") private var outFormat: OutputFormat = .jpg
 
     @AppStorage("keepOriginalName") private var keepOriginalName: Bool = false
+    @AppStorage("outputDestination") private var outputDestination: OutputDestination = .subfolder
     @AppStorage("sendToImageOptim") private var sendToImageOptim: Bool = false
+
+    @State private var customOutputDir: URL?
 
     private var preset: Preset { presets[min(presetIndex, presets.count - 1)] }
 
@@ -175,11 +185,26 @@ struct ContentView: View {
                     if mode != .triple {
                         Toggle("Keep original filename", isOn: $keepOriginalName)
                     }
-                    Toggle("Send to ImageOptim", isOn: $sendToImageOptim)
 
-                    Text("Output folders: UI Assets → scaled, Single → scaled_single")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
+                    Picker("Destination", selection: $outputDestination) {
+                        ForEach(OutputDestination.allCases) { d in
+                            Text(d.rawValue).tag(d)
+                        }
+                    }
+                    .pickerStyle(.menu)
+
+                    if outputDestination == .chooseFolder {
+                        HStack {
+                            Text(customOutputDir?.lastPathComponent ?? "No folder selected")
+                                .foregroundStyle(customOutputDir == nil ? .secondary : .primary)
+                                .lineLimit(1)
+                                .truncationMode(.middle)
+                            Spacer()
+                            Button("Browse…") { chooseOutputFolder() }
+                        }
+                    }
+
+                    Toggle("Send to ImageOptim", isOn: $sendToImageOptim)
                 }
                 .padding(8)
             }
@@ -278,10 +303,28 @@ struct ContentView: View {
         return true
     }
     
+    private func chooseOutputFolder() {
+        let panel = NSOpenPanel()
+        panel.allowsMultipleSelection = false
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.prompt = "Select"
+        if panel.runModal() == .OK {
+            customOutputDir = panel.url
+        }
+    }
+
     // MARK: - Processing
 
     private func process() {
         let inputs = model.files
+
+        if outputDestination == .chooseFolder {
+            if customOutputDir == nil {
+                chooseOutputFolder()
+            }
+            guard customOutputDir != nil else { return }
+        }
 
         // Validate
         func int(_ s: String) -> Int? { Int(s.trimmingCharacters(in: .whitespacesAndNewlines)) }
@@ -314,7 +357,7 @@ struct ContentView: View {
         log = ""
 
         DispatchQueue.global(qos: .userInitiated).async {
-            let (results, outputFiles) = runBatch(inputs: inputs, mode: mode, base: base, maxW: maxW, maxH: maxH)
+            let (results, outputFiles) = runBatch(inputs: inputs, mode: mode, base: base, maxW: maxW, maxH: maxH, destination: self.outputDestination, customDir: self.customOutputDir)
             DispatchQueue.main.async {
                 self.isRunning = false
                 self.log = results
@@ -343,7 +386,7 @@ struct ContentView: View {
         NSWorkspace.shared.open(files, withApplicationAt: appURL, configuration: NSWorkspace.OpenConfiguration())
     }
 
-    private func runBatch(inputs: [URL], mode: ScaleMode, base: Int, maxW: Int, maxH: Int) -> (String, [URL]) {
+    private func runBatch(inputs: [URL], mode: ScaleMode, base: Int, maxW: Int, maxH: Int, destination: OutputDestination, customDir: URL?) -> (String, [URL]) {
         var out = ""
         var outputFiles: [URL] = []
 
@@ -353,9 +396,16 @@ struct ContentView: View {
             let name = input.deletingPathExtension().lastPathComponent
 
             let outDir: URL = {
-                switch mode {
-                case .triple: return dir.appendingPathComponent("scaled", isDirectory: true)
-                case .singleWidth, .box: return dir.appendingPathComponent("scaled_single", isDirectory: true)
+                switch destination {
+                case .inPlace:
+                    return dir
+                case .chooseFolder:
+                    return customDir!
+                case .subfolder:
+                    switch mode {
+                    case .triple: return dir.appendingPathComponent("scaled", isDirectory: true)
+                    case .singleWidth, .box: return dir.appendingPathComponent("scaled_single", isDirectory: true)
+                    }
                 }
             }()
 
