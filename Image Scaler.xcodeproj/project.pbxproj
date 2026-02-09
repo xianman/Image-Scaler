@@ -6,20 +6,84 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		90F200982F3A8F04002E5FDB /* ImageScalerFinderSync.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 90F200912F3A8F04002E5FDB /* ImageScalerFinderSync.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		90F200962F3A8F04002E5FDB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90F200622F3A85BC002E5FDB /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90F200902F3A8F04002E5FDB;
+			remoteInfo = ImageScalerFinderSync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		90F2008A2F3A8693002E5FDB /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				90F200982F3A8F04002E5FDB /* ImageScalerFinderSync.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		90F2006A2F3A85BC002E5FDB /* Image Scaler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Image Scaler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90F200912F3A8F04002E5FDB /* ImageScalerFinderSync.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ImageScalerFinderSync.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		90F200992F3A8F04002E5FDB /* Exceptions for "ImageScalerFinderSync" folder in "ImageScalerFinderSync" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 90F200902F3A8F04002E5FDB /* ImageScalerFinderSync */;
+		};
+		90F200A02F3A9500002E5FDB /* Exceptions for "Image Scaler" folder in "Image Scaler" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 90F200692F3A85BC002E5FDB /* Image Scaler */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		90F2006C2F3A85BC002E5FDB /* Image Scaler */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				90F200A02F3A9500002E5FDB /* Exceptions for "Image Scaler" folder in "Image Scaler" target */,
+			);
 			path = "Image Scaler";
+			sourceTree = "<group>";
+		};
+		90F200922F3A8F04002E5FDB /* ImageScalerFinderSync */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				90F200992F3A8F04002E5FDB /* Exceptions for "ImageScalerFinderSync" folder in "ImageScalerFinderSync" target */,
+			);
+			path = ImageScalerFinderSync;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		90F200672F3A85BC002E5FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90F2008E2F3A8F04002E5FDB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				90F2006C2F3A85BC002E5FDB /* Image Scaler */,
+				90F200922F3A8F04002E5FDB /* ImageScalerFinderSync */,
 				90F2006B2F3A85BC002E5FDB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				90F2006A2F3A85BC002E5FDB /* Image Scaler.app */,
+				90F200912F3A8F04002E5FDB /* ImageScalerFinderSync.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,10 +121,12 @@
 				90F200662F3A85BC002E5FDB /* Sources */,
 				90F200672F3A85BC002E5FDB /* Frameworks */,
 				90F200682F3A85BC002E5FDB /* Resources */,
+				90F2008A2F3A8693002E5FDB /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				90F200972F3A8F04002E5FDB /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				90F2006C2F3A85BC002E5FDB /* Image Scaler */,
@@ -69,6 +137,28 @@
 			productName = "Image Scaler";
 			productReference = 90F2006A2F3A85BC002E5FDB /* Image Scaler.app */;
 			productType = "com.apple.product-type.application";
+		};
+		90F200902F3A8F04002E5FDB /* ImageScalerFinderSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90F2009A2F3A8F04002E5FDB /* Build configuration list for PBXNativeTarget "ImageScalerFinderSync" */;
+			buildPhases = (
+				90F2008D2F3A8F04002E5FDB /* Sources */,
+				90F2008E2F3A8F04002E5FDB /* Frameworks */,
+				90F2008F2F3A8F04002E5FDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				90F200922F3A8F04002E5FDB /* ImageScalerFinderSync */,
+			);
+			name = ImageScalerFinderSync;
+			packageProductDependencies = (
+			);
+			productName = ImageScalerFinderSync;
+			productReference = 90F200912F3A8F04002E5FDB /* ImageScalerFinderSync.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +171,9 @@
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					90F200692F3A85BC002E5FDB = {
+						CreatedOnToolsVersion = 26.2;
+					};
+					90F200902F3A8F04002E5FDB = {
 						CreatedOnToolsVersion = 26.2;
 					};
 				};
@@ -100,12 +193,20 @@
 			projectRoot = "";
 			targets = (
 				90F200692F3A85BC002E5FDB /* Image Scaler */,
+				90F200902F3A8F04002E5FDB /* ImageScalerFinderSync */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		90F200682F3A85BC002E5FDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90F2008F2F3A8F04002E5FDB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +223,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		90F2008D2F3A8F04002E5FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		90F200972F3A8F04002E5FDB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90F200902F3A8F04002E5FDB /* ImageScalerFinderSync */;
+			targetProxy = 90F200962F3A8F04002E5FDB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		90F200752F3A85BD002E5FDB /* Debug */ = {
@@ -250,15 +366,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QBMWAFP7PQ;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Image Scaler/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -282,15 +399,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = QBMWAFP7PQ;
-				ENABLE_APP_SANDBOX = YES;
+				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Image Scaler/Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -303,6 +421,68 @@
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		90F2009B2F3A8F04002E5FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QBMWAFP7PQ;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImageScalerFinderSync/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImageScalerFinderSync;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.catnapapps.Image-Scaler.ImageScalerFinderSync";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		90F2009C2F3A8F04002E5FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QBMWAFP7PQ;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ImageScalerFinderSync/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImageScalerFinderSync;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.catnapapps.Image-Scaler.ImageScalerFinderSync";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
@@ -326,6 +506,15 @@
 			buildConfigurations = (
 				90F200782F3A85BD002E5FDB /* Debug */,
 				90F200792F3A85BD002E5FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90F2009A2F3A8F04002E5FDB /* Build configuration list for PBXNativeTarget "ImageScalerFinderSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90F2009B2F3A8F04002E5FDB /* Debug */,
+				90F2009C2F3A8F04002E5FDB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
