@@ -37,8 +37,13 @@ final class FinderSync: FIFinderSync {
 
     @objc private func scaleImages(_ sender: Any?) {
         let controller = FIFinderSyncController.default()
-        let urls = controller.selectedItemURLs() ?? []
+        var urls = controller.selectedItemURLs() ?? []
         log.info("Clicked. selectedItemURLs=\(urls.count) targetedURL=\(controller.targetedURL()?.path ?? "nil")")
+
+        // Fallback: if no items selected, use the targeted directory itself
+        if urls.isEmpty, let targeted = controller.targetedURL() {
+            urls = [targeted]
+        }
 
         guard !urls.isEmpty else {
             NSSound.beep()

@@ -12,10 +12,29 @@ import Combine
 final class AppModel: ObservableObject {
     @Published var files: [URL] = []
 
+    private static let supportedImageExtensions: Set<String> = [
+        "png", "jpg", "jpeg", "gif", "tiff", "tif", "bmp", "webp", "heic", "avif"
+    ]
+
     func addFiles(_ urls: [URL]) {
         var set = Set(files)
         for u in urls where FileManager.default.fileExists(atPath: u.path) {
-            set.insert(u)
+            var isDir: ObjCBool = false
+            FileManager.default.fileExists(atPath: u.path, isDirectory: &isDir)
+            if isDir.boolValue {
+                let enumerator = FileManager.default.enumerator(
+                    at: u,
+                    includingPropertiesForKeys: [.isRegularFileKey],
+                    options: [.skipsHiddenFiles]
+                )
+                while let fileURL = enumerator?.nextObject() as? URL {
+                    if Self.supportedImageExtensions.contains(fileURL.pathExtension.lowercased()) {
+                        set.insert(fileURL)
+                    }
+                }
+            } else {
+                set.insert(u)
+            }
         }
         files = Array(set).sorted {
             $0.lastPathComponent.localizedCaseInsensitiveCompare($1.lastPathComponent) == .orderedAscending

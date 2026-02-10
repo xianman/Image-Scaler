@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+extension Notification.Name {
+    static let openImages = Notification.Name("openImages")
+    static let selectAllFiles = Notification.Name("selectAllFiles")
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     var model: AppModel?
 
@@ -52,6 +57,21 @@ struct Image_ScalerApp: App {
                     appDelegate.model = model
                     model.ingestCommandLineFiles()
                 }
+        }
+        .commands {
+            CommandGroup(replacing: .newItem) {
+                Button("Open Images…") {
+                    NotificationCenter.default.post(name: .openImages, object: nil)
+                }
+                .keyboardShortcut("o", modifiers: .command)
+            }
+
+            CommandGroup(after: .pasteboard) {
+                Button("Select All") {
+                    NotificationCenter.default.post(name: .selectAllFiles, object: nil)
+                }
+                .keyboardShortcut("a", modifiers: .command)
+            }
         }
     }
 }
